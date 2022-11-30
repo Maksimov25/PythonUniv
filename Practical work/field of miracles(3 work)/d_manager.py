@@ -5,11 +5,11 @@ symbol: str = '\u25A0'
 current_session_record: int = 0
 record: int = 0
 
-with open("record.txt", encoding='UTF-8') as r:
+with open("record.db", encoding='UTF-8') as r:
     record = int(r.read())
 
 words_list: list = []
-with open('words.txt', encoding='UTF-8') as wd:
+with open('words.db', encoding='UTF-8') as wd:
     words_list = wd.read().splitlines()
 
 
@@ -19,5 +19,5 @@ def random_word() -> str: #случайное слово из базы данн�
     return word
 
 def record() -> None:#Функция обновляет значение рекорда за одну сессию.
-    with open('record.txt', encoding='UTF-8', mode='w') as r:
+    with open('record.db', encoding='UTF-8', mode='w') as r:
         r.write(str(record))
