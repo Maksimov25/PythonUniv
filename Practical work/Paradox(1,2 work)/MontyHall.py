@@ -14,3 +14,4 @@ def MontyHall(count_iter):
                 count_choice += 1
     return f'количество не меняя выбор: {count} количество поменяв выбор: {count_choice} вероятность выиграша ' \
            f'при своем выборе: {(count * 100) / (count + count_choice)} '
+print(MontyHall(10001))
