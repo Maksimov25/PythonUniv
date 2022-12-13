@@ -10,4 +10,4 @@ def paradox(people, num_runs):
     return count/(num_runs/100)
 
 
-print(paradox(60, 1000), '%')
+print(paradox(24, 1000), '%')
