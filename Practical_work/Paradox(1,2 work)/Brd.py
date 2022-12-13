@@ -1,26 +1,13 @@
 import random
-def birthday(people_counter, iteration):
-    days = [day for day in range(0, 29)]
-    months = [month for month in range(0, 13)]
-    count = 0
-    count_not = 0
-    for iterations in range(0, iteration+1):
-        l1 = []
-        l2 = []
-        for i in range(0, people_counter+1):
-            l1.append(random.choice(days))
-            l2.append(random.choice(months))
-        for i in range(0, people_counter+1):
-            if l1.count(l1[i]) == 1 or l2.count(l2[i]) == 1:
-                count_not += 1
-                pass
-            for j in range(0, people_counter+1):
-                if j == i:
-                    pass
-                if l1[j] == l1[i] and l2[j] == l2[i]:
-                    count += 1
-    return f"количество совпадений: {count} \n" \
-           f"количество промахов: {count_not} \n" \
-           f"вероятность совпадения: {(count * 100) / (count_not + count)}"
-if __name__ == "__main__":
-    print(birthday(8, 20))
+def paradox(people, num_runs):
+    count = 0 #счетчик совпадений
+    for i in range(num_runs):
+        bdays = []
+        for p in range(people):
+            bdays.append(random.randint(1, 364))
+        if len(set(bdays)) != people: # проверка на совпадения
+            count += 1
+    return count/(num_runs/100)
+
+
+print(paradox(60, 1000), '%')
