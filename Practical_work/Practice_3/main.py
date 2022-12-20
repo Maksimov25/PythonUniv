@@ -14,3 +14,4 @@ def wof_start() -> None:
             print('Хотите сыграть еще?')
         elif command == 2:
             break
+wof_start()
