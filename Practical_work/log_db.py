@@ -7,7 +7,7 @@ current_session_record: int = 0
 record: int = 0
 
 with open("record_db", encoding='UTF-8') as r_db:
-    record = int(r_db.read())
+    record = int(log_db.read())
 
 words_list: list = []
 with open('words_db', encoding='UTF-8') as w_db:
