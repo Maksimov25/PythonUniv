@@ -1,7 +1,7 @@
 import pymorphy2
 import re
 from translate import Translator
-with open(r"PythonUniv/Practical_work/Practice_9(engLearn)/data.txt", encoding='UTF-8') as f:
+with open(r"/Users/mak/Downloads/dialog.html", encoding='UTF-8') as f:
     rez = f.read()
 pattern = r'(?:class=\"msg-body\">)([^<+]+)(?:</p>)'
 match = re.findall(pattern, rez)
@@ -20,7 +20,7 @@ slovar = dict(sorted(slovar.items(), key=lambda item: item[1], reverse=True))
 print(sorted(slovar))
 trnsl = []
 translates = Translator(from_lang='ru', to_lang='English')
-# print(translates.translate())
+
 for i in slovar.keys():
     trnsl.append(translates.translate(i))
 print(trnsl)
