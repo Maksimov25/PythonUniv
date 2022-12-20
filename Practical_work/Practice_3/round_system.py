@@ -4,10 +4,7 @@ import word_handler as wh
 
 
 def win_round() -> None:
-    """
-    Функция засчитывает победу в раунде
-    """
-    print('Вы выиграли! Приз в студию!')
+    print('Вы выиграли!')
 
     db_m.current_session_record += 1
 
@@ -18,9 +15,6 @@ def win_round() -> None:
 
 
 def start_game() -> None:
-    """
-    Функция разыгрывает игру до проигрыша игрока или до конца имеющихся слов
-    """
     lives_count: int = 0
     if not ds.is_difficult_set:
         lives_count = ds.get_lives_count_by_difficult()

@@ -2,11 +2,6 @@ from db_manager import locked_symbol
 
 
 def lock_word(word: str) -> str:
-    """
-    Зашифровывает слово
-    :param word: не зашифрованное слово
-    :return: зашифрованное слово
-    """
     word_list: list = [a for a in word]
     output: str = ''
 
@@ -17,13 +12,6 @@ def lock_word(word: str) -> str:
 
 
 def unlock_part_of_word(unlocked_word: str, locked_word: str, part: str) -> str:
-    """
-    Открывает букву во всем слове
-    :param unlocked_word: исходное незашифрованное слово
-    :param locked_word: зашифрованное слово с возможными открытыми частями, если игрок их угадывал
-    :param part: буква, которую нужно открыть во всем слове
-    :return: слово в результате открытия буквы
-    """
     all_part_indexes: list = []
 
     locked_word_list: list = [a for a in locked_word]

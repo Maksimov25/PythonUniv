@@ -15,18 +15,11 @@ with open('words_db', encoding='UTF-8') as w_db:
 
 
 def get_random_word() -> str:
-    """
-    :return: случайное уникальное слово из базы данных слов
-    """
-
     word: str = random.choice(words_list)
     words_list.remove(word)
     return word
 
 
 def update_record() -> None:
-    """
-    Функция обновляет значение рекорда
-    """
     with open('record_db', encoding='UTF-8', mode='w') as db:
         db.write(str(record))
