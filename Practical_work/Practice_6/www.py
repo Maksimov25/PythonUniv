@@ -1,15 +1,10 @@
 import re
-import ssl
-import urllib.request
 
-ssl._create_default_https_context = ssl._create_unverified_context
+pattern = r"^Рейс (\d+) (?:прибыл|отправился) (из|в) (\w+) в (\d{2}:\d{2}:\d{2})"
 
-tel_nums = urllib.request.urlopen("https://msk.spravker.ru/avtoservisy-avtotehcentry").read().decode()
-
-pattern = r'(?:class=\"org-widget\-header__title-link\">[^\w]*|<span class=\"org-widget\-header__meta ' \
-          r'org-widget\-header__meta\--location\">[^\w]*|<dt class=\"spec__index\"><span ' \
-          r'class=\"spec__index-inner\">Телефон</span></dt>\n*\s*<dd class=\"spec__value\">[^\w]*|<dt ' \
-          r'class=\"spec__index\"><span class=\"spec__index-inner\">Часы работы</span></dt>\n*\s*<dd ' \
-          r'class=\"spec__value\"[^\w]*>|<p>[^\w]*)([^<]*\b) '
-match = re.findall(pattern, tel_nums)
-print(match)
+with open("data.txt", "r", encoding="utf-8") as data:
+    with open("output.txt.txt", "w", encoding="utf-8") as output:
+        for line in data:
+            res = re.search(pattern, line)
+            if res:
+                output.write(f"[{res.groups()[3]}] Поезд № {res.groups()[0]} {res.groups()[1]} {res.groups()[2]}\n")
