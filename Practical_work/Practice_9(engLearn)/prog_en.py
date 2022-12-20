@@ -1,45 +1,26 @@
-import operator
-from typing import Any, Dict
-
 import pymorphy2
-import translate
-
-morph = pymorphy2.MorphAnalyzer()
-en_translator = translate.Translator(from_lang='ru', to_lang='en')
-
-
-def eng_phrasebook(file_name: str) -> None:
-    with open(file_name, encoding='windows-1251') as file:
-        list = file.read().split()
-        write_dict_to_file('translater_1.txt', get_sorted_dict(normalize_words_list(list)))
-
-
-def write_dict_to_file(file_name: str, book: dict) -> None:
-    with open(file_name, encoding='windows-1251', mode='w') as file:
-        for word in book:
-            if len(word) > 1 or word.lower() == 'я':
-                file.write(f'{word} | {en_translator.translate(word)} | {book[word]}\n')
-
-
-def get_sorted_dict(words: list) -> Dict[Any, Any]:
-    output = {}
-
-    for word in words:
-        output[word] = str(words.count(word))
-
-    return dict(sorted(output.items(), key=operator.itemgetter(1), reverse=True))
-
-
-def normalize_words_list(words_list: list) -> list:
-    for i in range(0, len(words_list)):
-        words_list[i] = "".join(a for a in words_list[i] if a.isalpha())
-        words_list[i] = get_normal_form(words_list[i])
-
-    return words_list
-
-
-def get_normal_form(word: str) -> str:
-    return morph.parse(word)[0].normal_form
-
-
-eng_phrasebook('data.txt')
+import re
+from translate import Translator
+with open(r"PythonUniv/Practical_work/Practice_9(engLearn)/data.txt", encoding='UTF-8') as f:
+    rez = f.read()
+pattern = r'(?:class=\"msg-body\">)([^<+]+)(?:</p>)'
+match = re.findall(pattern, rez)
+slov = []
+slovar = {}
+for i in range(len(match)):
+    slov.extend(match[i].split())
+morfi = pymorphy2.MorphAnalyzer()
+norm = [morfi.parse(i)[0].normal_form for i in slov]
+for i in norm:
+    if i in slovar:
+        continue
+    elif i not in slovar:
+        slovar[i] = norm.count(i)
+slovar = dict(sorted(slovar.items(), key=lambda item: item[1], reverse=True))
+print(sorted(slovar))
+trnsl = []
+translates = Translator(from_lang='ru', to_lang='English')
+# print(translates.translate())
+for i in slovar.keys():
+    trnsl.append(translates.translate(i))
+print(trnsl)
